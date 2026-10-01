@@ -1,6 +1,6 @@
 #include "PerfMonitor.hpp"
 #include <thread>
-#include <ctime>
+#include <chrono>
 #include <rocm_smi/rocm_smi.h>
 
 PerfMonitor::PerfMonitor(uint32_t gpu_id) : gpu_id(gpu_id), running(false) {
