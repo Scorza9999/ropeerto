@@ -4,7 +4,7 @@
 #include <stdexcept>
 
 
-PerfMetrics::PerfMetrics() {};
+PerfMetrics::PerfMetrics() {}
 
 void PerfMetrics::add_new(double latency, double gpu_power, double gpu_util) {
     latencies.push_back(latency);

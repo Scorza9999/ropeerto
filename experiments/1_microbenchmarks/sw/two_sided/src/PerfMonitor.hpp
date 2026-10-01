@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <thread>
+#include <cstdint>
 
 /**
  * @brief Class for monitoring GPU performance
