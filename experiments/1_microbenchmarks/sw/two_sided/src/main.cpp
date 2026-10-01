@@ -47,6 +47,7 @@
 
 // Project classes includes
 #include "PerfMetrics.hpp"
+#include "PerfMonitor.hpp"
 
 // Current bitstream is only synthesized with one vFPGA for simple pass-through data movement
 #define DEFAULT_VFPGA_ID 0
