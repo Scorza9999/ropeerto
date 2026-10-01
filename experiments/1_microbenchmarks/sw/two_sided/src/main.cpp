@@ -45,6 +45,9 @@
 #include <coyote/cBench.hpp>
 #include <coyote/cThread.hpp>
 
+// Project classes includes
+#include "PerfMetrics.hpp"
+
 // Current bitstream is only synthesized with one vFPGA for simple pass-through data movement
 #define DEFAULT_VFPGA_ID 0
 
@@ -137,60 +140,6 @@ private:
     uint32_t gpu_id;
     std::thread sampling_thread;
     std::vector<std::pair<double, double>> samples; // (GPU power W, utilization %)
-};
-
-/**
- * @brief Utility class for collecting and storing performance metrics
- *
- * This class collects performance metrics such as latencies, GPU power, and GPU utilization.
- * It provides methods to add new metrics, retrieve all metrics of a specific kind, and calculate
- */
-class PerfMetrics {    
-public:
-    PerfMetrics() {};
-
-    void add_new(double latency, double gpu_power, double gpu_util) {
-        latencies.push_back(latency);
-        gpu_powers.push_back(gpu_power);
-        gpu_utils.push_back(gpu_util);
-    }
-
-    std::vector<double> get_all(std::string kind) {
-        if (kind == "latency") {
-            return latencies;
-        } else if (kind == "gpu_power") {
-            return gpu_powers;
-        } else if (kind == "gpu_util") {
-            return gpu_utils;
-        } else {
-            throw std::runtime_error("Unknown kind of performance metric requested: " + kind);
-        }
-    }
-
-    double get_average(std::string kind) {
-        if (kind == "latency") {
-            return vector_average(latencies);
-        } else if (kind == "gpu_power") {
-            return vector_average(gpu_powers);
-        } else if (kind == "gpu_util") {
-            return vector_average(gpu_utils);
-        } else {
-            throw std::runtime_error("Unknown kind of performance metric requested: " + kind);
-        }
-    }
-
-private:
-    std::vector<double> latencies;
-    std::vector<double> gpu_powers;
-    std::vector<double> gpu_utils;
-
-    double vector_average(std::vector<double> &vec) {
-        double sum = 0.0;
-        for (const auto &val : vec) {
-            sum += val;
-        }
-        return vec.empty() ? 0.0 : sum / vec.size();
-    }
 };
 
 /**
