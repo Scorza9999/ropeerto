@@ -12,7 +12,7 @@
  */
 class PerfMetrics {    
 public:
-    PerfMetrics() {};
+    PerfMetrics();
 
     void add_new(double latency, double gpu_power, double gpu_util);
 
